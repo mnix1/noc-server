@@ -1,0 +1,7 @@
+type Profile {
+    tag: String!,
+    name: String!,
+    level: Int!,
+    gold: Int!,
+    diamond: Int!,
+}

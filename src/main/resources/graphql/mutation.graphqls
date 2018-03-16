@@ -1,0 +1,4 @@
+type Mutation {
+    createProfile(name: String!): Profile!
+    updateName(tag: String!, name: String!): Profile!
+}

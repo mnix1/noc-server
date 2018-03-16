@@ -1,0 +1,27 @@
+enum CardRarity {
+    COMMON
+    RARE
+    EPIC
+    LEGENDARY
+    FORGOTTEN
+}
+
+enum CardType {
+    CHARACTER,
+    ANIMAL,
+    PLANT,
+    STRUCTURE,
+    SPELL
+}
+
+type Card {
+    name: String!,
+    cost: Int!,
+    rarity: CardRarity!,
+    type: CardType!,
+}
+
+type Query {
+    findAllCards: [Card]!
+    findCard(name: String!): Card!
+}
