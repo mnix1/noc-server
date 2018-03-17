@@ -1,6 +1,7 @@
 type Query {
-    findAllProfiles: [Profile]!
-    findProfile(tag: String!): Profile!
-    findAllCards: [Card]!
-    findCard(name: String!): Card!
+    profiles: [Profile]!
+    profile(id: Long!): Profile!
+    cards: [Card]!
+    card(name: String!): Card!
+    profileCards: [ProfileCard]!
 }

@@ -20,8 +20,8 @@ public class Mutation implements GraphQLMutationResolver {
         return profile;
     }
 
-    public Profile updateName(String tag, String name) {
-        Optional<Profile> optionalProfile = profileRepository.findById(tag);
+    public Profile updateName(Long id, String name) {
+        Optional<Profile> optionalProfile = profileRepository.findById(id);
         if (!optionalProfile.isPresent()) {
             return null;
         }

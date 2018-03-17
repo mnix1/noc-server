@@ -1,6 +1,9 @@
 package com.mnix.natureofchampions;
 
 import com.mnix.natureofchampions.model.Profile;
+import com.mnix.natureofchampions.model.ProfileCard;
+import com.mnix.natureofchampions.model.constant.Card;
+import com.mnix.natureofchampions.repository.ProfileCardRepository;
 import com.mnix.natureofchampions.repository.ProfileRepository;
 import com.mnix.natureofchampions.resolver.Mutation;
 import com.mnix.natureofchampions.resolver.Query;
@@ -17,8 +20,8 @@ public class Application {
     }
 
     @Bean
-    public Query query(ProfileRepository profileRepository) {
-        return new Query(profileRepository);
+    public Query query(ProfileRepository profileRepository, ProfileCardRepository cardRepository) {
+        return new Query(profileRepository, cardRepository);
     }
 
     @Bean
@@ -27,10 +30,11 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner init(ProfileRepository profileRepository) {
+    public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository) {
         return (args) -> {
             Profile profile = new Profile("MNIX");
             profileRepository.save(profile);
+            profileCardRepository.save(new ProfileCard(profile, Card.WARRIOR));
         };
     }
 

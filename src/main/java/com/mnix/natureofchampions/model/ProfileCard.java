@@ -1,29 +1,33 @@
 package com.mnix.natureofchampions.model;
 
+import com.mnix.natureofchampions.model.constant.Card;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Setter
 @Getter
 @NoArgsConstructor
-//@Entity
+@AllArgsConstructor
+@Entity
 public class ProfileCard {
-//    @ManyToOne
-//    @JoinColumn(name = "profile_tag", nullable = false, updatable = false)
-//    private String profileTag;
-//    private String cardName;
-//    private Integer quantity = 0;
-//
-//    public ProfileCard(String profileTag, String cardName) {
-//        this.profileTag = profileTag;
-//        this.cardName = cardName;
-//    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "profile_id", nullable = false, updatable = false)
+    private Profile profile;
+    private Card card;
+    private Integer level = 0;
+    private Integer quantity = 0;
+
+    public ProfileCard(Profile profile, Card card) {
+        this.profile = profile;
+        this.card = card;
+    }
 
 }

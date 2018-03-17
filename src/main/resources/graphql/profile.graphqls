@@ -1,9 +1,10 @@
 type Profile {
-    tag: String!,
-    name: String!,
-    level: Int!,
-    experience: Int!,
-    gold: Int!,
-    diamond: Int!,
-#    cards: [ProfileCard]!
+    id: ID!
+    tag: String!
+    name: String!
+    level: Int!
+    experience: Int!
+    gold: Int!
+    diamond: Int!
+    cards: [ProfileCard]!
 }

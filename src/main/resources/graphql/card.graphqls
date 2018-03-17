@@ -1,8 +1,8 @@
 enum CardType {
-    CHARACTER,
-    ANIMAL,
-    PLANT,
-    CONSTRUCTION,
+    CHARACTER
+    ANIMAL
+    PLANT
+    CONSTRUCTION
     SPELL
 }
 
@@ -15,10 +15,10 @@ enum CardRarity {
 }
 
 type Card {
-    name: String!,
-    cost: Int!,
-    type: CardType!,
-    rarity: CardRarity!,
+    name: String!
+    cost: Int!
+    type: CardType!
+    rarity: CardRarity!
 }
 
 type Query {

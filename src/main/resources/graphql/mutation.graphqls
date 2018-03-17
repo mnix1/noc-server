@@ -1,4 +1,4 @@
 type Mutation {
     createProfile(name: String!): Profile!
-    updateName(tag: String!, name: String!): Profile!
+    updateName(id: Long!, name: String!): Profile!
 }

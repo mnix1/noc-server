@@ -1,5 +1,6 @@
-#type ProfileCard {
-#    profile: Profile!,
-#    card: Card!,
-#    quantity: Int!
-#}
+type ProfileCard {
+    id: ID!
+    profile: Profile!
+    card: Card!
+    quantity: Int!
+}
