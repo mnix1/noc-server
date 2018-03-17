@@ -1,3 +1,11 @@
+enum CardType {
+    CHARACTER,
+    ANIMAL,
+    PLANT,
+    CONSTRUCTION,
+    SPELL
+}
+
 enum CardRarity {
     COMMON
     RARE
@@ -6,19 +14,11 @@ enum CardRarity {
     FORGOTTEN
 }
 
-enum CardType {
-    CHARACTER,
-    ANIMAL,
-    PLANT,
-    STRUCTURE,
-    SPELL
-}
-
 type Card {
     name: String!,
     cost: Int!,
-    rarity: CardRarity!,
     type: CardType!,
+    rarity: CardRarity!,
 }
 
 type Query {

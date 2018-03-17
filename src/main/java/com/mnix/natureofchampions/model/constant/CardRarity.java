@@ -1,4 +1,4 @@
-package com.mnix.natureofchampions.model;
+package com.mnix.natureofchampions.model.constant;
 
 public enum CardRarity {
     COMMON,

@@ -17,6 +17,7 @@ public class Profile {
     private String tag;
     private String name;
     private Integer level;
+    private Integer experience;
     private Integer gold;
     private Integer diamond;
 
@@ -24,6 +25,7 @@ public class Profile {
         this.tag = UUID.randomUUID().toString();
         this.name = name;
         this.level = 0;
+        this.experience = 0;
         this.gold = 0;
         this.diamond = 0;
     }

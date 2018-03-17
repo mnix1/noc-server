@@ -1,9 +1,9 @@
-package com.mnix.natureofchampions.model;
+package com.mnix.natureofchampions.model.constant;
 
 public enum CardType {
     CHARACTER,
     ANIMAL,
     PLANT,
-    STRUCTURE,
+    CONSTRUCTION,
     SPELL
 }

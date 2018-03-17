@@ -1,20 +1,19 @@
 package com.mnix.natureofchampions.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.mnix.natureofchampions.model.Card;
 import com.mnix.natureofchampions.model.Profile;
-import com.mnix.natureofchampions.repository.CardRepository;
+import com.mnix.natureofchampions.model.constant.Card;
 import com.mnix.natureofchampions.repository.ProfileRepository;
+
+import java.util.Arrays;
 
 
 public class Query implements GraphQLQueryResolver {
 
     private ProfileRepository profileRepository;
-    private CardRepository cardRepository;
 
-    public Query(ProfileRepository profileRepository, CardRepository cardRepository) {
+    public Query(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
-        this.cardRepository = cardRepository;
     }
 
     public Iterable<Profile> findAllProfiles() {
@@ -26,11 +25,11 @@ public class Query implements GraphQLQueryResolver {
     }
 
     public Iterable<Card> findAllCards() {
-        return cardRepository.findAll();
+        return Arrays.asList(Card.values());
     }
 
     public Card findCard(String name) {
-        return cardRepository.findById(name).orElse(null);
+        return Card.valueOf(name);
     }
 
 }

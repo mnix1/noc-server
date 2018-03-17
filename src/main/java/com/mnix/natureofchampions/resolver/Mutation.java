@@ -2,20 +2,16 @@ package com.mnix.natureofchampions.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.mnix.natureofchampions.model.Profile;
-import com.mnix.natureofchampions.repository.CardRepository;
 import com.mnix.natureofchampions.repository.ProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
 public class Mutation implements GraphQLMutationResolver {
 
     private ProfileRepository profileRepository;
-    private CardRepository cardRepository;
 
-    public Mutation(ProfileRepository profileRepository, CardRepository cardRepository) {
+    public Mutation(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
-        this.cardRepository = cardRepository;
     }
 
     public Profile createProfile(String name) {

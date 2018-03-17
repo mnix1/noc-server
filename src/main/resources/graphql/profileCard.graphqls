@@ -1,0 +1,5 @@
+#type ProfileCard {
+#    profile: Profile!,
+#    card: Card!,
+#    quantity: Int!
+#}
