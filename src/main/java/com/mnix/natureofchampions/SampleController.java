@@ -11,7 +11,7 @@ public class SampleController {
 
     @GetMapping
     public String test() {
-//        Card card = new Card("Wizard", 3, CardRarity.COMMON, CardType.CHARACTER);
+//        Card card = new Card("Wizard", 3, Rarity.COMMON, Type.CHARACTER);
 //        cardRepository.save(card);
         return "OK";
     }

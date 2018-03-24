@@ -1,4 +1,4 @@
-enum CardType {
+enum Type {
     CHARACTER
     ANIMAL
     PLANT
@@ -6,7 +6,7 @@ enum CardType {
     SPELL
 }
 
-enum CardRarity {
+enum Rarity {
     COMMON
     RARE
     EPIC
@@ -14,14 +14,21 @@ enum CardRarity {
     FORGOTTEN
 }
 
-type Card {
-    name: String!
-    cost: Int!
-    type: CardType!
-    rarity: CardRarity!
+enum Statistic {
+    ELIXIR_MAX
+    ELIXIR_REGENERATION
+    HEALTH_MAX
+    HEALTH_REGENERATION
+    ABILITY_MAX
+    ABILITY_REGENERATION
+    MANA_MAX
+    MANA_REGENERATION
 }
 
-type Query {
-    findAllCards: [Card]!
-    findCard(name: String!): Card!
+type Card {
+    id: ID!
+    name: String!
+    type: Type!
+    rarity: Rarity!
+    statistics: [CardStatistic!]!
 }

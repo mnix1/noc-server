@@ -4,4 +4,5 @@ type Query {
     cards: [Card]!
     card(name: String!): Card!
     profileCards: [ProfileCard]!
+    cardStatistics: [CardStatistic]!
 }

@@ -1,8 +1,14 @@
 package com.mnix.natureofchampions;
 
+import com.mnix.natureofchampions.model.Card;
+import com.mnix.natureofchampions.model.CardStatistic;
 import com.mnix.natureofchampions.model.Profile;
 import com.mnix.natureofchampions.model.ProfileCard;
-import com.mnix.natureofchampions.model.constant.Card;
+import com.mnix.natureofchampions.model.constant.card.Rarity;
+import com.mnix.natureofchampions.model.constant.card.Statistic;
+import com.mnix.natureofchampions.model.constant.card.Type;
+import com.mnix.natureofchampions.repository.CardRepository;
+import com.mnix.natureofchampions.repository.CardStatisticRepository;
 import com.mnix.natureofchampions.repository.ProfileCardRepository;
 import com.mnix.natureofchampions.repository.ProfileRepository;
 import com.mnix.natureofchampions.resolver.Mutation;
@@ -12,6 +18,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class Application {
 
@@ -20,8 +29,8 @@ public class Application {
     }
 
     @Bean
-    public Query query(ProfileRepository profileRepository, ProfileCardRepository cardRepository) {
-        return new Query(profileRepository, cardRepository);
+    public Query query(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
+        return new Query(profileRepository, profileCardRepository, cardRepository, cardStatisticRepository);
     }
 
     @Bean
@@ -30,14 +39,29 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository) {
+    public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
         return (args) -> {
-            Profile profile = new Profile("MNIX");
-            profileRepository.save(profile);
-            profileCardRepository.save(new ProfileCard(profile, Card.WARRIOR));
+            initCards(cardRepository, cardStatisticRepository);
+            Profile mnix = new Profile("MNIX");
+            profileRepository.save(mnix);
+            List<ProfileCard>  mnixCards = new ArrayList<>();
+            mnixCards.add(new ProfileCard(mnix, cardRepository.findByName("Wizard")));
+            profileCardRepository.saveAll(mnixCards);
         };
     }
 
+    void initCards( CardRepository cardRepository, CardStatisticRepository cardStatisticRepository){
+        Card wizard = new Card("Wizard", Type.CHARACTER, Rarity.COMMON);
+        cardRepository.save(wizard);
+        List<CardStatistic> wizardStatistics = new ArrayList<>();
+        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_MAX, "1000"));
+        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_REGENERATION, "10"));
+        cardStatisticRepository.saveAll(wizardStatistics);
+    }
+
+    void initProfiles(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository) {
+
+    }
 
 //	@Bean /* see http://www.baeldung.com/spring-git-information */
 //	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
