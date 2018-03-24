@@ -1,5 +1,6 @@
 package com.mnix.natureofchampions;
 
+import com.mnix.natureofchampions.database.Init;
 import com.mnix.natureofchampions.model.Card;
 import com.mnix.natureofchampions.model.CardStatistic;
 import com.mnix.natureofchampions.model.Profile;
@@ -17,6 +18,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,36 +44,24 @@ public class Application {
     @Bean
     public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
         return (args) -> {
-            initCards(cardRepository, cardStatisticRepository);
-            Profile mnix = new Profile("MNIX");
-            profileRepository.save(mnix);
-            List<ProfileCard>  mnixCards = new ArrayList<>();
-            mnixCards.add(new ProfileCard(mnix, cardRepository.findByName("Wizard")));
-            profileCardRepository.saveAll(mnixCards);
+            Init init = new Init(profileRepository, profileCardRepository, cardRepository, cardStatisticRepository);
+            init.initCards();
+            init.initProfiles();
         };
     }
 
-    void initCards( CardRepository cardRepository, CardStatisticRepository cardStatisticRepository){
-        Card wizard = new Card("Wizard", Type.CHARACTER, Rarity.COMMON);
-        cardRepository.save(wizard);
-        List<CardStatistic> wizardStatistics = new ArrayList<>();
-        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_MAX, "1000"));
-        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_REGENERATION, "10"));
-        cardStatisticRepository.saveAll(wizardStatistics);
-    }
 
-    void initProfiles(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository) {
 
-    }
 
-//	@Bean /* see http://www.baeldung.com/spring-git-information */
-//	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-//		PropertySourcesPlaceholderConfigurer gitInfo = new PropertySourcesPlaceholderConfigurer();
-//		gitInfo.setLocation(new ClassPathResource("git.properties"));
-//		gitInfo.setIgnoreResourceNotFound(true);
-//		gitInfo.setIgnoreUnresolvablePlaceholders(true);
-//		return gitInfo;
-//	}
+
+	@Bean /* see http://www.baeldung.com/spring-git-information */
+	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+		PropertySourcesPlaceholderConfigurer gitInfo = new PropertySourcesPlaceholderConfigurer();
+		gitInfo.setLocation(new ClassPathResource("git.properties"));
+		gitInfo.setIgnoreResourceNotFound(true);
+		gitInfo.setIgnoreUnresolvablePlaceholders(true);
+		return gitInfo;
+	}
 
 //	@Bean
 //	GraphQLSchema schema() {

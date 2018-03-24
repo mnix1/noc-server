@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 @RestController
 public class VersionController {
-//    @Value("${git.commit.id.describe-short}")
-//    private String version;
-//
-//    @GetMapping("/version")
-//    public String version() {
-//        return version;
-//    }
+    @Value("${git.commit.id.describe-short}")
+    private String version;
+
+    @GetMapping("/version")
+    public String version() {
+        return version;
+    }
 }
