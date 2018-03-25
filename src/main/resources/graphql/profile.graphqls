@@ -1,7 +1,7 @@
 type Profile {
     id: ID!
     tag: String!
-    name: String!
+    name: String
     level: Int!
     experience: Int!
     gold: Int!

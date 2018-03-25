@@ -39,7 +39,7 @@ public class ProdSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/js/**.js", "/css/**.css").permitAll()
+                .antMatchers("/profile").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .logout()
@@ -59,7 +59,6 @@ public class ProdSecurityConfig extends WebSecurityConfigurerAdapter {
         oAuth2Filter.setRestTemplate(oAuth2RestTemplate);
         oAuth2Filter.setTokenServices(new UserInfoTokenServices(resourceServerProperties.getUserInfoUri(),
                 resourceServerProperties.getClientId()));
-
         return oAuth2Filter;
     }
 }

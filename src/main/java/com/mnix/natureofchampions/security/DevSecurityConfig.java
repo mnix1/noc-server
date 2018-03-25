@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static com.mnix.natureofchampions.security.Roles.ADMIN;
 import static com.mnix.natureofchampions.security.Roles.USER;
@@ -23,10 +24,12 @@ public class DevSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").fullyAuthenticated()
+                .anyRequest().fullyAuthenticated()
                 .and()
                 .httpBasic()
-                .and().csrf().disable();
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Override
