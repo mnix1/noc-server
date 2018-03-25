@@ -2,6 +2,8 @@ package com.noc.controller;
 
 import com.noc.model.Profile;
 import com.noc.repository.ProfileRepository;
+import com.noc.service.ProfileService;
+import com.noc.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -18,32 +20,21 @@ import java.util.Map;
 public class ProfileController {
 
     @Autowired
-    ProfileRepository profileRepository;
+    ProfileService profileService;
+
+    @Autowired
+    SessionService sessionService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public Map profileId(Principal user) {
         Map<String, Long> model = new HashMap<>();
-        if (user == null) {
-            return model;
-        }
-        if (user instanceof OAuth2Authentication) {
-            Map<String, String> details = (Map<String, String>) ((OAuth2Authentication) user).getUserAuthentication().getDetails();
-            String authId = details.get("sub");
-            model.put("profileId", createOrRetrieveProfile(authId).getId());
-        }
-        if (user instanceof UsernamePasswordAuthenticationToken) {
-            String authId = ((User) ((UsernamePasswordAuthenticationToken) user).getPrincipal()).getUsername();
-            model.put("profileId", createOrRetrieveProfile(authId).getId());
+        String authId = profileService.getAuthId(user);
+        if (authId != null) {
+            Profile profile = profileService.createOrRetrieveProfile(authId);
+            sessionService.setProfileId(profile.getId());
+            model.put("profileId", profile.getId());
         }
         return model;
     }
 
-    private Profile createOrRetrieveProfile(String authId) {
-        Profile profile = profileRepository.findByAuthId(authId);
-        if (profile == null) {
-            profile = new Profile(authId);
-            profileRepository.save(profile);
-        }
-        return profile;
-    }
 }

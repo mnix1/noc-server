@@ -10,14 +10,20 @@ import com.noc.repository.CardStatisticRepository;
 import com.noc.repository.ProfileCardRepository;
 import com.noc.repository.ProfileRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @AllArgsConstructor
 public class Query implements GraphQLQueryResolver {
 
+    @Autowired
     private ProfileRepository profileRepository;
+    @Autowired
     private ProfileCardRepository profileCardRepository;
-
+    @Autowired
     private CardRepository cardRepository;
+    @Autowired
     private CardStatisticRepository cardStatisticRepository;
 
     public Iterable<Profile> profiles() {

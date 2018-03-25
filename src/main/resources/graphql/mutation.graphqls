@@ -1,4 +1,3 @@
 type Mutation {
-    createProfile(name: String!): Profile!
-    updateName(id: Long!, name: String!): Profile!
+    updateProfileName(id: Long!, name: String!): Profile!
 }

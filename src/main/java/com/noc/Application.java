@@ -22,16 +22,6 @@ public class Application {
     }
 
     @Bean
-    public Query query(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
-        return new Query(profileRepository, profileCardRepository, cardRepository, cardStatisticRepository);
-    }
-
-    @Bean
-    public Mutation mutation(ProfileRepository profileRepository) {
-        return new Mutation(profileRepository);
-    }
-
-    @Bean
     public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
         return (args) -> {
             Init init = new Init(profileRepository, profileCardRepository, cardRepository, cardStatisticRepository);
