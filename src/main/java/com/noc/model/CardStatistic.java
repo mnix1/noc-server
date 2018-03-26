@@ -15,11 +15,11 @@ public class CardStatistic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Statistic statistic;
+    private String value;
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false, updatable = false)
     private Card card;
-    private Statistic statistic;
-    private String value;
 
     public CardStatistic(Card card, Statistic statistic, String value) {
         this.card = card;

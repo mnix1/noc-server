@@ -1,0 +1,7 @@
+type Deck {
+    id: ID!
+    name: String
+    position: Int!
+    profile: Profile!
+    cards: [DeckCard!]!
+}

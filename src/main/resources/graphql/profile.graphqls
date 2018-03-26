@@ -6,5 +6,6 @@ type Profile {
     experience: Int!
     gold: Int!
     diamond: Int!
-    cards: [ProfileCard]!
+    cards: [ProfileCard!]!
+    decks: [Deck!]!
 }

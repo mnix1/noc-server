@@ -2,7 +2,7 @@ type Query {
     profiles: [Profile]!
     profile(id: Long!): Profile!
     cards: [Card]!
-    card(name: String!): Card!
-    profileCards: [ProfileCard]!
+#    card(name: String!): Card!
+#    profileCards: [ProfileCard]!
     cardStatistics: [CardStatistic]!
 }

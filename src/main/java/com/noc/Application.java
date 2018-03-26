@@ -5,8 +5,6 @@ import com.noc.repository.CardRepository;
 import com.noc.repository.CardStatisticRepository;
 import com.noc.repository.ProfileCardRepository;
 import com.noc.repository.ProfileRepository;
-import com.noc.resolver.Mutation;
-import com.noc.resolver.Query;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

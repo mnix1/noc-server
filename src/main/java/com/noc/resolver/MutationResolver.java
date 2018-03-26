@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class Mutation implements GraphQLMutationResolver {
+public class MutationResolver implements GraphQLMutationResolver {
 
     @Autowired
     private ProfileRepository profileRepository;

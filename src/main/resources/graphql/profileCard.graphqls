@@ -1,6 +1,6 @@
 type ProfileCard {
     id: ID!
+    quantity: Int!
     profile: Profile!
     card: Card!
-    quantity: Int!
 }

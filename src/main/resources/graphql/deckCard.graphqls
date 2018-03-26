@@ -1,0 +1,6 @@
+type DeckCard {
+    id: ID!
+    position: Int!
+    deck: Deck!
+    card: Card!
+}

@@ -5,17 +5,13 @@ import com.noc.model.Card;
 import com.noc.model.CardStatistic;
 import com.noc.model.Profile;
 import com.noc.model.ProfileCard;
-import com.noc.repository.CardRepository;
-import com.noc.repository.CardStatisticRepository;
-import com.noc.repository.ProfileCardRepository;
-import com.noc.repository.ProfileRepository;
+import com.noc.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
-public class Query implements GraphQLQueryResolver {
+public class QueryResolver implements GraphQLQueryResolver {
 
     @Autowired
     private ProfileRepository profileRepository;
@@ -25,6 +21,10 @@ public class Query implements GraphQLQueryResolver {
     private CardRepository cardRepository;
     @Autowired
     private CardStatisticRepository cardStatisticRepository;
+    @Autowired
+    private DeckRepository deckRepository;
+    @Autowired
+    private DeckCardRepository deckCardRepository;
 
     public Iterable<Profile> profiles() {
         return profileRepository.findAll();

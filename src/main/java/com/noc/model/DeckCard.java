@@ -1,6 +1,5 @@
 package com.noc.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,24 +9,16 @@ import javax.persistence.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class ProfileCard {
+public class DeckCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Integer level = 0;
-    private Integer quantity = 0;
+    private Integer position;
     @ManyToOne
-    @JoinColumn(name = "profile_id", nullable = false, updatable = false)
-    private Profile profile;
+    @JoinColumn(name = "deck_id", nullable = false, updatable = false)
+    private Deck deck;
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false, updatable = false)
     private Card card;
-
-    public ProfileCard(Profile profile, Card card) {
-        this.profile = profile;
-        this.card = card;
-    }
-
 }

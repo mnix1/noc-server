@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Setter
 @Getter
@@ -24,9 +22,10 @@ public class Profile {
     private Integer experience;
     private Integer gold;
     private Integer diamond;
-    @OneToMany(mappedBy = "profile", fetch = FetchType.EAGER)
-    private List<ProfileCard> cards;
-
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
+    private Set<ProfileCard> cards;
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
+    private Set<Deck> decks;
 
     public Profile(String authId) {
         this.tag = UUID.randomUUID().toString().substring(0, 6);
@@ -35,7 +34,8 @@ public class Profile {
         this.experience = 0;
         this.gold = 0;
         this.diamond = 0;
-        this.cards = new ArrayList<>();
+        this.cards = new HashSet<>();
+        this.decks = new HashSet<>();
     }
 
 }

@@ -5,20 +5,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String email;
-    private String password;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
+    private Integer position;
+    @ManyToOne
+    @JoinColumn(name = "profile_id", nullable = false, updatable = false)
     private Profile profile;
+    @OneToMany(mappedBy = "deck", fetch = FetchType.LAZY)
+    private Set<DeckCard> cards;
 }
