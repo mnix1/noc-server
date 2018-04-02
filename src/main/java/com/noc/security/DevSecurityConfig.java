@@ -42,6 +42,10 @@ public class DevSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("dev").password("{noop}1").roles(USER, ADMIN);
+                .withUser("dev").password("{noop}1").roles(USER, ADMIN)
+                .and()
+                .withUser("t1").password("{noop}t").roles(USER)
+                .and()
+                .withUser("t2").password("{noop}t").roles(USER);
     }
 }

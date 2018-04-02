@@ -1,0 +1,6 @@
+type ProfileLadderBattle {
+    id: ID!
+    team: Team!
+    profile: Profile!
+    ladderBattle: LadderBattle!
+}

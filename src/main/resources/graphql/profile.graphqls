@@ -8,4 +8,5 @@ type Profile {
     diamond: Int!
     cards: [ProfileCard!]!
     decks: [Deck!]!
+    ladderBattles: [ProfileLadderBattle!]!
 }
