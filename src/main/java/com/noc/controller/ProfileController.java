@@ -1,13 +1,9 @@
 package com.noc.controller;
 
-import com.noc.model.Profile;
-import com.noc.repository.ProfileRepository;
-import com.noc.service.ProfileService;
+import com.noc.model.entity.social.Profile;
+import com.noc.service.social.ProfileService;
 import com.noc.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;

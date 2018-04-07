@@ -1,0 +1,6 @@
+type Query {
+    teams: [Team]!
+    profiles: [Profile]!
+    profile(id: Long!): Profile!
+    cards: [Card]!
+}

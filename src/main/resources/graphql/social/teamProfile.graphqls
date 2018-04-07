@@ -1,0 +1,7 @@
+type TeamProfile {
+    id: ID!
+    isLeader: Boolean!
+    isCoLeader: Boolean!
+    team: Team!
+    profile: Profile!
+}

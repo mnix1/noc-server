@@ -1,16 +1,14 @@
 package com.noc.database;
 
-import com.noc.model.Card;
-import com.noc.model.CardStatistic;
-import com.noc.model.Profile;
-import com.noc.model.ProfileCard;
-import com.noc.model.constant.card.Rarity;
-import com.noc.model.constant.card.Statistic;
-import com.noc.model.constant.card.Type;
-import com.noc.repository.CardRepository;
-import com.noc.repository.CardStatisticRepository;
-import com.noc.repository.ProfileCardRepository;
-import com.noc.repository.ProfileRepository;
+import com.noc.model.constant.card.CardProperty;
+import com.noc.model.constant.card.CardRarity;
+import com.noc.model.entity.collection.Card;
+import com.noc.model.entity.collection.CardStatistic;
+import com.noc.model.constant.card.CardType;
+import com.noc.repository.collection.CardRepository;
+import com.noc.repository.collection.CardStatisticRepository;
+import com.noc.repository.collection.ProfileCardRepository;
+import com.noc.repository.social.ProfileRepository;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -26,18 +24,18 @@ public class Init {
     CardStatisticRepository cardStatisticRepository;
 
     public void initCards(){
-        Card wizard = new Card("Wizard", Type.CHARACTER, Rarity.COMMON);
+        Card wizard = new Card("Wizard", CardType.CHARACTER, CardRarity.COMMON);
         cardRepository.save(wizard);
         List<CardStatistic> wizardStatistics = new ArrayList<>();
-        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_MAX, "1000"));
-        wizardStatistics.add(new CardStatistic(wizard, Statistic.HEALTH_REGENERATION, "10"));
+        wizardStatistics.add(new CardStatistic(wizard, CardProperty.HEALTH_MAX, "1000"));
+        wizardStatistics.add(new CardStatistic(wizard, CardProperty.HEALTH_REGENERATION, "10"));
         cardStatisticRepository.saveAll(wizardStatistics);
 
-        Card warrior = new Card("Warrior", Type.CHARACTER, Rarity.RARE);
+        Card warrior = new Card("Warrior", CardType.CHARACTER, CardRarity.RARE);
         cardRepository.save(warrior);
         List<CardStatistic> warriorStatistics = new ArrayList<>();
-        warriorStatistics.add(new CardStatistic(warrior, Statistic.HEALTH_MAX, "1000"));
-        warriorStatistics.add(new CardStatistic(warrior, Statistic.HEALTH_REGENERATION, "10"));
+        warriorStatistics.add(new CardStatistic(warrior, CardProperty.HEALTH_MAX, "1000"));
+        warriorStatistics.add(new CardStatistic(warrior, CardProperty.HEALTH_REGENERATION, "10"));
         cardStatisticRepository.saveAll(warriorStatistics);
     }
 

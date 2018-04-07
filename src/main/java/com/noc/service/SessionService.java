@@ -1,18 +1,9 @@
 package com.noc.service;
 
-import com.noc.Session;
-import com.noc.model.Profile;
-import com.noc.repository.ProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.noc.model.Session;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
-
-import java.security.Principal;
-import java.util.Map;
 
 @Service
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)

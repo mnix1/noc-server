@@ -1,0 +1,6 @@
+type Team {
+    id: ID!
+    tag: String!
+    name: String
+    profiles: [TeamProfile!]!
+}

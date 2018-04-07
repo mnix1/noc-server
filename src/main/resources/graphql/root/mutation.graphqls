@@ -1,0 +1,6 @@
+type Mutation {
+    createTeam(name: String!): Team!
+    updateProfileName(name: String!): Profile!
+    prepareLadder1Vs1Battle: Ladder1Vs1Battle!
+    cancelLadder1Vs1Battle: Ladder1Vs1Battle
+}

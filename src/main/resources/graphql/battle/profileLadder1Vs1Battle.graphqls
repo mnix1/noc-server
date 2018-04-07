@@ -1,0 +1,6 @@
+type ProfileLadder1Vs1Battle {
+    id: ID!
+    side: BattleSide!
+    profile: Profile!
+    ladder1Vs1Battle: Ladder1Vs1Battle!
+}

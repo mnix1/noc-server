@@ -1,0 +1,14 @@
+type Profile {
+    id: ID!
+    tag: String!
+    name: String
+    level: Int!
+    experience: Int!
+    gold: Int!
+    diamond: Int!
+    ladder1Vs1BattleElo: Int!
+    teams: [TeamProfile!]!
+    cards: [ProfileCard!]!
+    decks: [Deck!]!
+    ladder1Vs1Battles: [ProfileLadder1Vs1Battle!]!
+}

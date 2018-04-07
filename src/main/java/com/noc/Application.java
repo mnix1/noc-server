@@ -1,10 +1,10 @@
 package com.noc;
 
 import com.noc.database.Init;
-import com.noc.repository.CardRepository;
-import com.noc.repository.CardStatisticRepository;
-import com.noc.repository.ProfileCardRepository;
-import com.noc.repository.ProfileRepository;
+import com.noc.repository.collection.CardRepository;
+import com.noc.repository.collection.CardStatisticRepository;
+import com.noc.repository.collection.ProfileCardRepository;
+import com.noc.repository.social.ProfileRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

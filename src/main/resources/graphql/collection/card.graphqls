@@ -1,0 +1,23 @@
+enum CardType {
+    CHARACTER
+    ANIMAL
+    PLANT
+    CONSTRUCTION
+    SPELL
+}
+
+enum CardRarity {
+    COMMON
+    RARE
+    EPIC
+    LEGENDARY
+    FORGOTTEN
+}
+
+type Card {
+    id: ID!
+    name: String!
+    type: CardType!
+    rarity: CardRarity!
+    statistics: [CardStatistic!]!
+}
