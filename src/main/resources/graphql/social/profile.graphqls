@@ -8,6 +8,7 @@ type Profile {
     diamond: Int!
     ladder1Vs1BattleElo: Int!
     teams: [TeamProfile!]!
+    champions: [ProfileChampion!]!
     cards: [ProfileCard!]!
     decks: [Deck!]!
     ladder1Vs1Battles: [ProfileLadder1Vs1Battle!]!

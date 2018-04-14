@@ -1,29 +1,34 @@
 package com.noc.model.entity.collection;
 
 import com.noc.model.entity.social.Profile;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Deck {
+public class ProfileChampion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private Integer position;
+    private Integer level = 0;
+    private Integer quantity = 0;
     @ManyToOne
     @JoinColumn(name = "profile_id", nullable = false, updatable = false)
     private Profile profile;
     @ManyToOne
-    @JoinColumn(name = "champion_id", updatable = false)
+    @JoinColumn(name = "champion_id", nullable = false, updatable = false)
     private Champion champion;
-    @OneToMany(mappedBy = "deck", fetch = FetchType.LAZY)
-    private Set<DeckCard> cards;
+
+    public ProfileChampion(Profile profile, Champion champion) {
+        this.profile = profile;
+        this.champion = champion;
+    }
+
 }

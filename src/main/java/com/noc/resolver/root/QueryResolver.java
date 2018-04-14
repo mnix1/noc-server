@@ -3,6 +3,7 @@ package com.noc.resolver.root;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.noc.model.entity.collection.Card;
 import com.noc.model.entity.collection.CardStatistic;
+import com.noc.model.entity.collection.Champion;
 import com.noc.model.entity.social.Profile;
 import com.noc.model.entity.collection.ProfileCard;
 import com.noc.model.entity.social.Team;
@@ -22,6 +23,8 @@ public class QueryResolver implements GraphQLQueryResolver {
     private ProfileCardRepository profileCardRepository;
     @Autowired
     private CardRepository cardRepository;
+    @Autowired
+    private ChampionRepository championRepository;
     @Autowired
     private CardStatisticRepository cardStatisticRepository;
     @Autowired
@@ -47,6 +50,10 @@ public class QueryResolver implements GraphQLQueryResolver {
 
     public Iterable<Card> cards() {
         return cardRepository.findAll();
+    }
+
+    public Iterable<Champion> champions() {
+        return championRepository.findAll();
     }
 
     public Card card(Long id) {

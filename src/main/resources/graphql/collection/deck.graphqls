@@ -3,5 +3,6 @@ type Deck {
     name: String
     position: Int!
     profile: Profile!
-    cards: [DeckCard!]!
+    champion: Champion
+    cards: [DeckCard!]
 }

@@ -4,6 +4,7 @@ import com.noc.helper.TagHelper;
 import com.noc.model.entity.collection.Deck;
 import com.noc.model.entity.collection.ProfileCard;
 import com.noc.model.entity.battle.ProfileLadder1Vs1Battle;
+import com.noc.model.entity.collection.ProfileChampion;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +33,8 @@ public class Profile {
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<ProfileLadder1Vs1Battle> ladder1Vs1Battles;
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
+    private Set<ProfileChampion> champions;
+    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<ProfileCard> cards;
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<Deck> decks;
@@ -46,6 +49,7 @@ public class Profile {
         this.ladder1Vs1BattleElo = 0;
         this.ladder1Vs1Battles = new HashSet<>();
         this.cards = new HashSet<>();
+        this.champions = new HashSet<>();
         this.decks = new HashSet<>();
         this.teams = new HashSet<>();
     }

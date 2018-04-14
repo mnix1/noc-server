@@ -1,0 +1,6 @@
+type ChampionStatistic {
+    id: ID!
+    property: CardProperty!
+    value: String
+    champion: Champion!
+}

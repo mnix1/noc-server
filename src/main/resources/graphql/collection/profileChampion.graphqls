@@ -1,7 +1,7 @@
-type ProfileCard {
+type ProfileChampion {
     id: ID!
     level: Int!
     quantity: Int!
     profile: Profile!
-    card: Card!
+    champion: Champion!
 }

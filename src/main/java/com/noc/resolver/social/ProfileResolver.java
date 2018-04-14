@@ -4,11 +4,13 @@ import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.noc.model.entity.battle.ProfileLadder1Vs1Battle;
 import com.noc.model.entity.collection.Deck;
 import com.noc.model.entity.collection.ProfileCard;
+import com.noc.model.entity.collection.ProfileChampion;
 import com.noc.model.entity.social.Profile;
 import com.noc.model.entity.social.TeamProfile;
 import com.noc.repository.battle.ProfileLadder1Vs1BattleRepository;
 import com.noc.repository.collection.DeckRepository;
 import com.noc.repository.collection.ProfileCardRepository;
+import com.noc.repository.collection.ProfileChampionRepository;
 import com.noc.repository.social.TeamProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,12 +22,18 @@ public class ProfileResolver implements GraphQLResolver<Profile> {
     @Autowired
     private ProfileCardRepository profileCardRepository;
     @Autowired
+    private ProfileChampionRepository profileChampionRepository;
+    @Autowired
     private DeckRepository deckRepository;
     @Autowired
     private ProfileLadder1Vs1BattleRepository profileLadder1Vs1BattleRepository;
 
     public Iterable<TeamProfile> teams(Profile profile) {
         return teamProfileRepository.findAllByProfile(profile);
+    }
+
+    public Iterable<ProfileChampion> champions(Profile profile) {
+        return profileChampionRepository.findAllByProfile(profile);
     }
 
     public Iterable<ProfileCard> cards(Profile profile) {

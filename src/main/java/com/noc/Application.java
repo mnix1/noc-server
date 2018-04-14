@@ -5,6 +5,7 @@ import com.noc.repository.collection.CardRepository;
 import com.noc.repository.collection.CardStatisticRepository;
 import com.noc.repository.collection.ProfileCardRepository;
 import com.noc.repository.social.ProfileRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,14 +16,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableOAuth2Client
 public class Application {
 
+    @Autowired
+    Init init;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    public CommandLineRunner init(ProfileRepository profileRepository, ProfileCardRepository profileCardRepository, CardRepository cardRepository, CardStatisticRepository cardStatisticRepository) {
+    public CommandLineRunner initDatabase() {
         return (args) -> {
-            Init init = new Init(profileRepository, profileCardRepository, cardRepository, cardStatisticRepository);
             init.initCards();
             init.initProfiles();
         };
