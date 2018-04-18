@@ -21,4 +21,8 @@ public class ChampionCard {
     @JoinColumn(name = "card_id", nullable = false, updatable = false)
     private Card card;
 
+    public ChampionCard(Champion champion, Card card) {
+        this.champion = champion;
+        this.card = card;
+    }
 }

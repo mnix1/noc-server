@@ -3,6 +3,7 @@ package com.noc.model.entity.collection;
 import com.noc.model.constant.card.CardRarity;
 import com.noc.model.constant.card.CardType;
 import com.noc.model.constant.card.ChampionKind;
+import com.noc.model.constant.card.ChampionName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,15 @@ public class Champion {
         this.firstName = firstName;
         this.nickName = nickName;
         this.lastName = lastName;
+        this.kind = kind;
+        this.type = type;
+        this.rarity = rarity;
+    }
+
+    public Champion(ChampionName name, ChampionKind kind, CardType type, CardRarity rarity) {
+        this.firstName = name.getFirstName();
+        this.nickName = name.getNickName();
+        this.lastName = name.getLastName();
         this.kind = kind;
         this.type = type;
         this.rarity = rarity;

@@ -31,4 +31,10 @@ public class ProfileCard {
         this.card = card;
     }
 
+    public ProfileCard(Integer level, Integer quantity, Profile profile, Card card) {
+        this.level = level;
+        this.quantity = quantity;
+        this.profile = profile;
+        this.card = card;
+    }
 }

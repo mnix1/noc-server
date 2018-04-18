@@ -21,4 +21,10 @@ public class DeckCard {
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false, updatable = false)
     private Card card;
+
+    public DeckCard(Integer position, Deck deck, Card card) {
+        this.position = position;
+        this.deck = deck;
+        this.card = card;
+    }
 }

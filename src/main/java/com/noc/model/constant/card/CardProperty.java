@@ -8,5 +8,6 @@ public enum CardProperty {
     ABILITY_MAX,
     ABILITY_REGENERATION,
     MANA_MAX,
-    MANA_REGENERATION;
+    MANA_REGENERATION,
+    DAMAGE;
 }

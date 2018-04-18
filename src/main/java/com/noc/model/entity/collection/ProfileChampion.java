@@ -31,4 +31,10 @@ public class ProfileChampion {
         this.champion = champion;
     }
 
+    public ProfileChampion(Integer level, Integer quantity, Profile profile, Champion champion) {
+        this.level = level;
+        this.quantity = quantity;
+        this.profile = profile;
+        this.champion = champion;
+    }
 }

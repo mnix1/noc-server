@@ -26,4 +26,11 @@ public class Deck {
     private Champion champion;
     @OneToMany(mappedBy = "deck", fetch = FetchType.LAZY)
     private Set<DeckCard> cards;
+
+    public Deck(String name, Integer position, Profile profile, Champion champion) {
+        this.name = name;
+        this.position = position;
+        this.profile = profile;
+        this.champion = champion;
+    }
 }
