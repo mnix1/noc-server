@@ -1,4 +1,4 @@
-package com.noc.security;
+package com.noc.config.security;
 
 public final class Roles {
     public static final String USER = "USER";

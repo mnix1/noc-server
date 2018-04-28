@@ -10,11 +10,15 @@ import com.noc.model.entity.social.Team;
 import com.noc.repository.collection.*;
 import com.noc.repository.social.ProfileRepository;
 import com.noc.repository.social.TeamRepository;
+import com.noc.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class QueryResolver implements GraphQLQueryResolver {
+
+    @Autowired
+    private SessionService sessionService;
     @Autowired
     private TeamRepository teamRepository;
     @Autowired
@@ -40,7 +44,8 @@ public class QueryResolver implements GraphQLQueryResolver {
         return profileRepository.findAll();
     }
 
-    public Profile profile(Long id) {
+    public Profile profile(Long id) throws IllegalAccessException {
+        sessionService.checkForProfileId(id);
         return profileRepository.findById(id).orElse(null);
     }
 

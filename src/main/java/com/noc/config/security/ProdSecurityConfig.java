@@ -1,4 +1,4 @@
-package com.noc.security;
+package com.noc.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;

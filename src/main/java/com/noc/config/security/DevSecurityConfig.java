@@ -1,4 +1,4 @@
-package com.noc.security;
+package com.noc.config.security;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import static com.noc.security.Roles.ADMIN;
-import static com.noc.security.Roles.USER;
+import static com.noc.config.security.Roles.ADMIN;
+import static com.noc.config.security.Roles.USER;
 
 @Configuration
 @EnableWebSecurity
