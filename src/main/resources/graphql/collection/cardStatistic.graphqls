@@ -7,6 +7,7 @@ enum CardProperty {
     ABILITY_REGENERATION
     MANA_MAX
     MANA_REGENERATION
+    DAMAGE
 }
 
 type CardStatistic {

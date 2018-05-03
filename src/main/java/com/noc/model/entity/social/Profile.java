@@ -3,7 +3,6 @@ package com.noc.model.entity.social;
 import com.noc.helper.TagHelper;
 import com.noc.model.entity.collection.Deck;
 import com.noc.model.entity.collection.ProfileCard;
-import com.noc.model.entity.battle.ProfileLadder1Vs1Battle;
 import com.noc.model.entity.collection.ProfileChampion;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,8 +30,6 @@ public class Profile {
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<TeamProfile> teams;
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
-    private Set<ProfileLadder1Vs1Battle> ladder1Vs1Battles;
-    @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<ProfileChampion> champions;
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
     private Set<ProfileCard> cards;
@@ -47,11 +44,14 @@ public class Profile {
         this.gold = 0;
         this.diamond = 0;
         this.ladder1Vs1BattleElo = 0;
-        this.ladder1Vs1Battles = new HashSet<>();
         this.cards = new HashSet<>();
         this.champions = new HashSet<>();
         this.decks = new HashSet<>();
         this.teams = new HashSet<>();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return id.equals(((Profile) obj).id);
+    }
 }

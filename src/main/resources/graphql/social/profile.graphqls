@@ -11,5 +11,4 @@ type Profile {
     champions: [ProfileChampion!]!
     cards: [ProfileCard!]!
     decks: [Deck!]!
-    ladder1Vs1Battles: [ProfileLadder1Vs1Battle!]!
 }

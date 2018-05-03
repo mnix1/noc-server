@@ -25,6 +25,10 @@ public class ProfileService {
         return profileRepository.findById(sessionService.getProfileId()).get();
     }
 
+    public Profile getProfile(Long profileId) {
+        return profileRepository.findById(profileId).get();
+    }
+
     public String getAuthId(Principal user) {
         if (user == null) {
             return null;

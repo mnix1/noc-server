@@ -1,13 +1,11 @@
 package com.noc.resolver.social;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.noc.model.entity.battle.ProfileLadder1Vs1Battle;
 import com.noc.model.entity.collection.Deck;
 import com.noc.model.entity.collection.ProfileCard;
 import com.noc.model.entity.collection.ProfileChampion;
 import com.noc.model.entity.social.Profile;
 import com.noc.model.entity.social.TeamProfile;
-import com.noc.repository.battle.ProfileLadder1Vs1BattleRepository;
 import com.noc.repository.collection.DeckRepository;
 import com.noc.repository.collection.ProfileCardRepository;
 import com.noc.repository.collection.ProfileChampionRepository;
@@ -25,8 +23,6 @@ public class ProfileResolver implements GraphQLResolver<Profile> {
     private ProfileChampionRepository profileChampionRepository;
     @Autowired
     private DeckRepository deckRepository;
-    @Autowired
-    private ProfileLadder1Vs1BattleRepository profileLadder1Vs1BattleRepository;
 
     public Iterable<TeamProfile> teams(Profile profile) {
         return teamProfileRepository.findAllByProfile(profile);
@@ -42,10 +38,6 @@ public class ProfileResolver implements GraphQLResolver<Profile> {
 
     public Iterable<Deck> decks(Profile profile) {
         return deckRepository.findByProfile(profile);
-    }
-
-    public Iterable<ProfileLadder1Vs1Battle> ladder1Vs1Battles(Profile profile) {
-        return profileLadder1Vs1BattleRepository.findAllByProfile(profile);
     }
 
 }

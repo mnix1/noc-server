@@ -1,6 +1,0 @@
-type Ladder1Vs1Battle {
-    id: ID!
-    status: BattleStatus!
-    result: BattleResult
-    profiles: [ProfileLadder1Vs1Battle!]!
-}
