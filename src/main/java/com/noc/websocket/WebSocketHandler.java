@@ -1,6 +1,7 @@
 package com.noc.websocket;
 
-import com.noc.battle.initialize.BattleService;
+import com.noc.battle.BattleWrapper;
+import com.noc.battle.BattleService;
 import com.noc.service.social.ProfileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Autowired
     ProfileService profileService;
     @Autowired
-    WebSocketService webSocketService;
+    ProfileConnectionService profileConnectionService;
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable throwable) throws Exception {
@@ -30,24 +31,29 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        log.info(String.format("Session %s closed because of %s", session.getId(), status.getReason()));
-        webSocketService.deleteConnection(session);
+        log.debug(String.format("Session %s closed because of %s", session.getId(), status.getReason()));
+        profileConnectionService.deleteConnection(session);
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        log.info("Connected: sessionId: " + session.getId());
-        webSocketService.newConnection(session);
+        log.debug("Connected: sessionId: " + session.getId());
+        profileConnectionService.newConnection(session);
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage jsonTextMessage) throws Exception {
         String message = jsonTextMessage.getPayload();
         log.debug("Message received: " + jsonTextMessage.getPayload() + ", from sessionId: " + session.getId());
-        if (message.equals("START_BATTLE")) {
-            battleService.prepareBattle(profileService.getProfile(webSocketService.findBySessionId(session.getId()).getProfileId()));
-        } else if (message.equals("CANCEL_BATTLE")) {
-            battleService.cancelBattle(profileService.getProfile(webSocketService.findBySessionId(session.getId()).getProfileId()));
+        if (message.equals("BATTLE_START")) {
+            ProfileConnection profileConnection = profileConnectionService.findBySessionId(session.getId());
+            BattleWrapper battleWrapper = battleService.createBattle(profileConnection);
+            if (battleWrapper.isPreparingStatus()) {
+                battleService.prepareBattle(battleWrapper);
+                log.debug("Preparing Battle");
+            }
+        } else if (message.equals("BATTLE_CANCEL")) {
+            battleService.cancelBattle(profileConnectionService.findBySessionId(session.getId()));
         }
     }
 }
