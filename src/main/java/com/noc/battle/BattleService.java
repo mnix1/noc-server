@@ -36,8 +36,9 @@ public class BattleService {
     public void prepareBattle(BattleWrapper battleWrapper) {
         battleWrapper.sendMessage("BATTLE_PREPARING");
         battleWrapper.updateProfileConnections(profileService);
-        new BattleManager(battleWrapper);
+        BattleManager battleManager = new BattleManager(battleWrapper);
         battleWrapper.sendMessage("BATTLE_IN_PROGRESS");
+        battleManager.start();
     }
 
 
