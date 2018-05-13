@@ -17,6 +17,16 @@ public class BattleState implements Serializable {
         this.battleObjects.add(battleObject);
     }
 
+    public void moveChampion(int profileIndex, Map props) {
+        BattleObject champion = battleObjects.stream()
+                .filter(battleObject -> battleObject.getProfileIndex() == profileIndex && battleObject.isChampion())
+                .findFirst()
+                .orElseThrow(IllegalAccessError::new);
+        if (props.containsKey("moveForward")) {
+            champion.setPz(champion.getPz() + 1);
+        }
+    }
+
     public Map<String, Object> prepareJson(int profileIndex) {
         Map<String, Object> state = new HashMap<>();
         state.put("my", battleObjects.stream().filter(battleObject -> battleObject.getProfileIndex() == profileIndex).collect(Collectors.toList()));

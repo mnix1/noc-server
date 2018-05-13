@@ -15,6 +15,8 @@ public class ProfileConnection {
 
     private WebSocketSession webSocketSession;
 
+    private boolean isReady;
+
     public ProfileConnection(Long profileId, WebSocketSession webSocketSession) {
         this.profileId = profileId;
         this.webSocketSession = webSocketSession;

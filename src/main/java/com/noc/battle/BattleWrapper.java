@@ -4,13 +4,18 @@ import com.noc.model.constant.battle.BattleResult;
 import com.noc.model.constant.battle.BattleStatus;
 import com.noc.service.social.ProfileService;
 import com.noc.websocket.ProfileConnection;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.socket.TextMessage;
 
+import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
+@Getter
+@Setter
 public class BattleWrapper {
+
     private List<ProfileConnection> profileConnections = new CopyOnWriteArrayList<ProfileConnection>();
     private BattleStatus battleStatus;
     private BattleResult battleResult = BattleResult.EMPTY;

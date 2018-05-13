@@ -41,19 +41,26 @@ public class WebSocketHandler extends TextWebSocketHandler {
         profileConnectionService.newConnection(session);
     }
 
+    private ProfileConnection findProfileConnection(WebSocketSession session) {
+        return profileConnectionService.findBySessionId(session.getId());
+    }
+
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage jsonTextMessage) throws Exception {
         String message = jsonTextMessage.getPayload();
         log.debug("Message received: " + jsonTextMessage.getPayload() + ", from sessionId: " + session.getId());
-        if (message.equals("BATTLE_START")) {
-            ProfileConnection profileConnection = profileConnectionService.findBySessionId(session.getId());
-            BattleWrapper battleWrapper = battleService.createBattle(profileConnection);
+        if (message.contains("MOVE")) {
+            battleService.move(session.getId(), message.substring(4));
+        } else if (message.equals("BATTLE_START")) {
+            BattleWrapper battleWrapper = battleService.createBattle(findProfileConnection(session));
             if (battleWrapper.isPreparingStatus()) {
                 battleService.prepareBattle(battleWrapper);
                 log.debug("Preparing Battle");
             }
         } else if (message.equals("BATTLE_CANCEL")) {
-            battleService.cancelBattle(profileConnectionService.findBySessionId(session.getId()));
+            battleService.cancelBattle(findProfileConnection(session));
+        } else if (message.equals("READY_FOR_START")) {
+            battleService.readyForStart(session.getId());
         }
     }
 }
