@@ -29,6 +29,7 @@ public class BattleState implements Serializable {
         champion.setRy((Integer) props.get("ry") / 1000d);
         champion.setRz((Integer) props.get("rz") / 1000d);
         champion.setSprint(props.containsKey("sprint"));
+        champion.setDance(props.containsKey("dance"));
         champion.setMoveForward(props.containsKey("moveForward"));
         champion.setMoveBackward(props.containsKey("moveBackward"));
         champion.setMoveLeft(props.containsKey("moveLeft"));

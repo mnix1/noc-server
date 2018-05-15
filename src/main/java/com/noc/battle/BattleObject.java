@@ -42,6 +42,7 @@ public class BattleObject implements Serializable {
 
     @JsonIgnore
     private boolean sprint;
+    private boolean dance;
     private boolean moveForward;
     private boolean moveBackward;
     private boolean moveLeft;
@@ -72,6 +73,8 @@ public class BattleObject implements Serializable {
             this.a = "walkRight";
             this.pz += ang2 * delta / 800000d;
             this.px -= ang1 * delta / 800000d;
+        } else if (dance) {
+            this.a = "dance";
         } else if (!this.a.equals("idle") || this.lastAng1 != ang1 || this.lastAng2 != ang2) {
             this.a = "idle";
         } else {
