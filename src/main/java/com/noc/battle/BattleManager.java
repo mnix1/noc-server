@@ -23,8 +23,8 @@ public class BattleManager {
         battleWrapper.getProfileConnections().forEach(profileConnection -> {
             sessionIdToProfileIndexMap.put(profileConnection.getWebSocketSession().getId(), sessionIdToProfileIndexMap.size());
         });
-        this.battleState.addBattleObject(new BattleObject(0, "albertHoop", CardType.CHAMPION, "idle", 0, 0, -20, 0, 0, 0));
-        this.battleState.addBattleObject(new BattleObject(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 20, 0, Math.PI, 0));
+        this.battleState.addBattleObject(new BattleObject(0, "albertHoop", CardType.CHAMPION, "idle", 0, 0, -14, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleObject(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 14, 0, Math.PI, 0));
     }
 
     public void ready() {
@@ -56,11 +56,16 @@ public class BattleManager {
     }
 
     public void start() {
-        Flowable.interval(30, TimeUnit.MILLISECONDS)
-                .subscribe(aLong -> {
-                    for (int i = 0; i < battleWrapper.profileConnected(); i++) {
-                        String battleStateJson = objectMapper.writeValueAsString(battleState.prepareJson(i));
-                        battleWrapper.sendMessage("BATTLE_STATE" + battleStateJson, i);
+        int tick = 25;
+        long interval = (long) 1000000d / tick;
+        Flowable.interval(interval, TimeUnit.MICROSECONDS)
+                .map(aLong -> battleState.update(interval))
+                .subscribe(changed -> {
+                    if (changed) {
+                        for (int i = 0; i < battleWrapper.profileConnected(); i++) {
+                            String battleStateJson = objectMapper.writeValueAsString(battleState.prepareJson(i));
+                            battleWrapper.sendMessage("BATTLE_STATE" + battleStateJson, i);
+                        }
                     }
                 });
     }

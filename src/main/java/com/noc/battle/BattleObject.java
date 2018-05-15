@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class BattleObject implements Serializable {
     @JsonIgnore
     private int profileIndex;
@@ -23,6 +22,65 @@ public class BattleObject implements Serializable {
     private double rx;
     private double ry;
     private double rz;
+    @JsonIgnore
+    private double lastAng1;
+    @JsonIgnore
+    private double lastAng2;
+
+    public BattleObject(int profileIndex, String id, CardType t, String a, double px, double py, double pz, double rx, double ry, double rz) {
+        this.profileIndex = profileIndex;
+        this.id = id;
+        this.t = t;
+        this.a = a;
+        this.px = px;
+        this.py = py;
+        this.pz = pz;
+        this.rx = rx;
+        this.ry = ry;
+        this.rz = rz;
+    }
+
+    @JsonIgnore
+    private boolean sprint;
+    private boolean moveForward;
+    private boolean moveBackward;
+    private boolean moveLeft;
+    private boolean moveRight;
+
+    public boolean updatePosition(long delta) {
+        double ang1 = Math.cos(this.ry) * Math.cos(this.rz);
+        double ang2 = Math.sin(this.ry) * Math.cos(this.rz) * Math.cos(this.rx);
+        if (moveForward) {
+            if (sprint) {
+                this.a = "run";
+                this.pz += ang1 * delta * 3 / 800000d;
+                this.px += ang2 * delta * 3 / 800000d;
+            } else {
+                this.a = "walk";
+                this.pz += ang1 * delta / 800000d;
+                this.px += ang2 * delta / 800000d;
+            }
+        } else if (moveBackward) {
+            this.a = "walkBack";
+            this.pz -= ang1 * delta / 800000d;
+            this.px -= ang2 * delta / 800000d;
+        } else if (moveLeft) {
+            this.a = "walkLeft";
+            this.pz -= ang2 * delta / 800000d;
+            this.px += ang1 * delta / 800000d;
+        } else if (moveRight) {
+            this.a = "walkRight";
+            this.pz += ang2 * delta / 800000d;
+            this.px -= ang1 * delta / 800000d;
+        } else if (!this.a.equals("idle") || this.lastAng1 != ang1 || this.lastAng2 != ang2) {
+            this.a = "idle";
+        } else {
+            return false;
+        }
+        this.lastAng1 = ang1;
+        this.lastAng2 = ang2;
+        return true;
+    }
 
     boolean isChampion() {
         return t == CardType.CHAMPION;

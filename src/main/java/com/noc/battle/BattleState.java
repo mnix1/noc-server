@@ -22,9 +22,25 @@ public class BattleState implements Serializable {
                 .filter(battleObject -> battleObject.getProfileIndex() == profileIndex && battleObject.isChampion())
                 .findFirst()
                 .orElseThrow(IllegalAccessError::new);
-        if (props.containsKey("moveForward")) {
-            champion.setPz(champion.getPz() + 1);
+//        champion.setRx((Double) props.get("rx"));
+//        champion.setRy((Double) props.get("ry"));
+//        champion.setRz((Double) props.get("rz"));
+        champion.setRx((Integer) props.get("rx") / 1000d);
+        champion.setRy((Integer) props.get("ry") / 1000d);
+        champion.setRz((Integer) props.get("rz") / 1000d);
+        champion.setSprint(props.containsKey("sprint"));
+        champion.setMoveForward(props.containsKey("moveForward"));
+        champion.setMoveBackward(props.containsKey("moveBackward"));
+        champion.setMoveLeft(props.containsKey("moveLeft"));
+        champion.setMoveRight(props.containsKey("moveRight"));
+    }
+
+    public boolean update(long delta) {
+        boolean changed = false;
+        for (BattleObject battleObject : battleObjects) {
+            changed |= battleObject.updatePosition(delta);
         }
+        return changed;
     }
 
     public Map<String, Object> prepareJson(int profileIndex) {
