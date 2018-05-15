@@ -1,0 +1,15 @@
+{
+  "main.css": "static/css/main.d19067e7.css",
+  "main.css.map": "static/css/main.d19067e7.css.map",
+  "main.js": "static/js/main.1da5c88c.js",
+  "main.js.map": "static/js/main.1da5c88c.js.map",
+  "static\\media\\base.fbx": "static/media/base.4d11adb9.fbx",
+  "static\\media\\idle.fbx": "static/media/idle.c819b6f3.fbx",
+  "static\\media\\logo2.png": "static/media/logo2.1997d939.png",
+  "static\\media\\map.png": "static/media/map.816a0136.png",
+  "static\\media\\run.fbx": "static/media/run.4b1b992c.fbx",
+  "static\\media\\walk.fbx": "static/media/walk.3aac4a13.fbx",
+  "static\\media\\walkBack.fbx": "static/media/walkBack.e967d110.fbx",
+  "static\\media\\walkLeft.fbx": "static/media/walkLeft.98bb578b.fbx",
+  "static\\media\\walkRight.fbx": "static/media/walkRight.2e406fe8.fbx"
+}
