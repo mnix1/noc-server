@@ -28,10 +28,6 @@ public class BattleChampion implements Serializable {
     private double rx;
     private double ry;
     private double rz;
-    @JsonIgnore
-    private double lastAng1;
-    @JsonIgnore
-    private double lastAng2;
 
     public BattleChampion(int profileIndex, String id, CardType t, String a, double px, double py, double pz, double rx, double ry, double rz) {
         this.profileIndex = profileIndex;
@@ -88,7 +84,6 @@ public class BattleChampion implements Serializable {
     public boolean updatePosition(long delta) {
         double factor1 = Math.cos(this.ry) * Math.cos(this.rz) * delta / 1000000d;
         double factor2 = Math.sin(this.ry) * Math.cos(this.rz) * Math.cos(this.rx) * delta / 1000000d;
-//        if(moveForward &&)
         double dpz = 0;
         double dpx = 0;
         if (moveForward || moveBackward || moveLeft || moveRight) {
@@ -116,7 +111,6 @@ public class BattleChampion implements Serializable {
         } else {
             return false;
         }
-        log.debug("dpz: " + dpz + ", dpx: " + dpx + ", sum: " + (dpz + dpx));
         this.pz += dpz;
         this.px += dpx;
         return true;
