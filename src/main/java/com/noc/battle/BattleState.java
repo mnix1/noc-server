@@ -3,51 +3,50 @@ package com.noc.battle;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
 public class BattleState implements Serializable {
-    private List<BattleObject> battleObjects = new ArrayList<>();
+    private List<BattleChampion> battleChampions = new ArrayList<>();
 
-    public void addBattleObject(BattleObject battleObject) {
-        this.battleObjects.add(battleObject);
+    public void addBattleObject(BattleChampion battleChampion) {
+        this.battleChampions.add(battleChampion);
     }
 
     public void moveChampion(int profileIndex, Map props) {
-        BattleObject champion = battleObjects.stream()
-                .filter(battleObject -> battleObject.getProfileIndex() == profileIndex && battleObject.isChampion())
+        BattleChampion champion = battleChampions.stream()
+                .filter(battleChampion -> battleChampion.getProfileIndex() == profileIndex && battleChampion.isChampion())
                 .findFirst()
                 .orElseThrow(IllegalAccessError::new);
-//        champion.setRx((Double) props.get("rx"));
-//        champion.setRy((Double) props.get("ry"));
-//        champion.setRz((Double) props.get("rz"));
-        champion.setRx((Integer) props.get("rx") / 1000d);
-        champion.setRy((Integer) props.get("ry") / 1000d);
-        champion.setRz((Integer) props.get("rz") / 1000d);
-        champion.setSprint(props.containsKey("sprint"));
-        champion.setDance(props.containsKey("dance"));
-        champion.setMoveForward(props.containsKey("moveForward"));
-        champion.setMoveBackward(props.containsKey("moveBackward"));
-        champion.setMoveLeft(props.containsKey("moveLeft"));
-        champion.setMoveRight(props.containsKey("moveRight"));
+        if (props.containsKey("rx")) {
+            champion.setRx((Integer) props.get("rx") / 1000d);
+        }
+        if (props.containsKey("ry")) {
+            champion.setRy((Integer) props.get("ry") / 1000d);
+        }
+        if (props.containsKey("rz")) {
+            champion.setRz((Integer) props.get("rz") / 1000d);
+        }
+        if (props.containsKey("a")) {//actions
+            champion.setActions((List<String>) props.get("a"));
+        } else {
+            champion.setActions(Collections.emptyList());
+        }
     }
 
     public boolean update(long delta) {
         boolean changed = false;
-        for (BattleObject battleObject : battleObjects) {
-            changed |= battleObject.updatePosition(delta);
+        for (BattleChampion battleChampion : battleChampions) {
+            changed |= battleChampion.updatePosition(delta) | battleChampion.updateAnimation();
         }
         return changed;
     }
 
     public Map<String, Object> prepareJson(int profileIndex) {
         Map<String, Object> state = new HashMap<>();
-        state.put("my", battleObjects.stream().filter(battleObject -> battleObject.getProfileIndex() == profileIndex).collect(Collectors.toList()));
-        state.put("other", battleObjects.stream().filter(battleObject -> battleObject.getProfileIndex() != profileIndex).collect(Collectors.toList()));
+        state.put("my", battleChampions.stream().filter(battleChampion -> battleChampion.getProfileIndex() == profileIndex).collect(Collectors.toList()));
+        state.put("other", battleChampions.stream().filter(battleChampion -> battleChampion.getProfileIndex() != profileIndex).collect(Collectors.toList()));
         return state;
     }
 }

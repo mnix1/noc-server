@@ -23,8 +23,8 @@ public class BattleManager {
         battleWrapper.getProfileConnections().forEach(profileConnection -> {
             sessionIdToProfileIndexMap.put(profileConnection.getWebSocketSession().getId(), sessionIdToProfileIndexMap.size());
         });
-        this.battleState.addBattleObject(new BattleObject(0, "albertHoop", CardType.CHAMPION, "idle", 0, 0, -14, 0, 0, 0));
-        this.battleState.addBattleObject(new BattleObject(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 14, 0, Math.PI, 0));
+        this.battleState.addBattleObject(new BattleChampion(0, "albertHoop", CardType.CHAMPION, "idle", 0, 0, -14, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleChampion(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 14, 0, Math.PI, 0));
     }
 
     public void ready() {
