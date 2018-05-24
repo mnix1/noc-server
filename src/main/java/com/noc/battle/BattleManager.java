@@ -23,8 +23,13 @@ public class BattleManager {
         battleWrapper.getProfileConnections().forEach(profileConnection -> {
             sessionIdToProfileIndexMap.put(profileConnection.getWebSocketSession().getId(), sessionIdToProfileIndexMap.size());
         });
-        this.battleState.addBattleObject(new BattleChampion(0, "albertHoop", CardType.CHAMPION, "idle", 0, 0, -14, 0, 0, 0));
-        this.battleState.addBattleObject(new BattleChampion(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 14, 0, Math.PI, 0));
+        this.battleState.addBattleObject(new BattleChampion(0, "albertHoop", CardType.CHAMPION, "idle", -2, 0, -2, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleChampion(0, "eveRapid", CardType.CHAMPION, "idle", 2, 0, -2, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleChampion(0, "gregorHeart", CardType.CHAMPION, "idle", 0, 0, -1, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleChampion(0, "arissaRodrigo", CardType.CHAMPION, "idle", 2, 0, -1, 0, 0, 0));
+        this.battleState.addBattleObject(new BattleChampion(1, "tommyBrook", CardType.CHAMPION, "idle", 0, 0, 1, 0, Math.PI, 0));
+        this.battleState.addBattleObject(new BattleChampion(1, "emmaWood", CardType.CHAMPION, "idle", -2, 0, 2, 0, Math.PI, 0));
+        this.battleState.addBattleObject(new BattleChampion(1, "erikaFlint", CardType.CHAMPION, "idle", 2, 0, 2, 0, Math.PI, 0));
     }
 
     public void ready() {

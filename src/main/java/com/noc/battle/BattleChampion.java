@@ -1,6 +1,7 @@
 package com.noc.battle;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.noc.helper.TagHelper;
 import com.noc.model.constant.card.CardType;
 import com.noc.websocket.WebSocketHandler;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,8 @@ public class BattleChampion implements Serializable {
 
     @JsonIgnore
     private int profileIndex;
-    private String id;
+    private String uuid;
+    private String cid;
     private CardType t;
     private String a;
     private double px;
@@ -29,9 +31,10 @@ public class BattleChampion implements Serializable {
     private double ry;
     private double rz;
 
-    public BattleChampion(int profileIndex, String id, CardType t, String a, double px, double py, double pz, double rx, double ry, double rz) {
+    public BattleChampion(int profileIndex, String cid, CardType t, String a, double px, double py, double pz, double rx, double ry, double rz) {
         this.profileIndex = profileIndex;
-        this.id = id;
+        this.uuid = TagHelper.randomTag();
+        this.cid = cid;
         this.t = t;
         this.a = a;
         this.px = px;
